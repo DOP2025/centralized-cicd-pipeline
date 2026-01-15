@@ -18,4 +18,4 @@ jobs:
           # token: ${{secrets.GITHUB_PAT}} # Required if repo is private
 
       - name: Call composite action
-        uses: ./centralized-cicd-pipeline-tools/.github/actions/demo-actions/action.yml
+        uses: ../actions/demo-actions
