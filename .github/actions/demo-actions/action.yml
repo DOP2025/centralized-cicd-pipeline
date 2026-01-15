@@ -6,3 +6,7 @@ runs:
     - name: 'Demo Composite Action Step'
       run: echo "This is a demo composite action!"
       shell: bash
+
+    - name: 'Demo Composite Action Step 2 - list files'
+      run: ls -tla
+      shell: bash
