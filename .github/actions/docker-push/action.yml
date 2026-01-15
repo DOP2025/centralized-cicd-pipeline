@@ -1,0 +1,12 @@
+name: 'Docker Push'
+description: 'Push Docker Image to DockerHub'
+runs:
+  using: 'composite'
+  steps:
+    - name: 'Build Docker Image'
+      run: echo "Starting push docker image"
+      shell: bash
+
+    - name: 'Docker Image is pushed successfully'
+      run: echo "Docker Image is pushed successfully"
+      shell: bash

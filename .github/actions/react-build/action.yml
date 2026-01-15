@@ -1,0 +1,12 @@
+name: 'React Build'
+description: 'Build React Artifact'
+runs:
+  using: 'composite'
+  steps:
+    - name: 'Build React Artifact'
+      run: echo "Starting build Reactjs Artifact"
+      shell: bash
+
+    - name: 'React Artifact is built successfully'
+      run: echo "React Artifact is built successfully"
+      shell: bash

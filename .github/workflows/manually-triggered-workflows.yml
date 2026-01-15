@@ -1,0 +1,22 @@
+name: DEMO WORKFLOWS
+
+on: 
+  workflow_call:
+
+jobs:
+  demo:
+    runs-on: dop10_self_hosted_runner_01
+    steps:
+      - name: Demo Workflow Executed Successfully!
+        run: echo "Demo Workflow Executed Successfully!"
+
+      - name: Checkout Centralized Actions
+        uses: actions/checkout@v6
+        with:
+          repository: DOP2025/centralized-cicd-pipeline
+          path: centralized-cicd-pipeline-tools
+          # token: ${{secrets.GITHUB_PAT}} # Required if repo is private
+
+      - name: Call composite action
+        uses: DOP2025/centralized-cicd-pipeline/.github/actions/demo-actions@main
+

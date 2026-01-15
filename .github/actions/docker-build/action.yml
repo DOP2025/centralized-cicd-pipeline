@@ -1,0 +1,49 @@
+# name: 'Docker Build Action'
+# description: 'Build Docker Image'
+
+# inputs: 
+#   DOCKERHUB_USERNAME:
+#     description: 'Docker Hub Username'
+#     required: true
+#     default: ''
+#   DOCKERHUB_PASSWORD:
+#     description: 'Docker Hub Password'
+#     required: true
+#     default: ''
+#   DOCKERHUB_REPO_NAME:
+#     description: 'Docker Hub Repository Name'
+#     required: true
+#     default: ''
+
+# runs:
+#   using: 'composite'
+#   steps:
+#     - name: 'Install Docker'
+#       uses: docker/setup-docker-action@v4
+
+#     - name: Login to Docker Hub
+#       uses: docker/login-action@v3
+#       with:
+#         username: ${{ inputs.DOCKERHUB_USERNAME }}
+#         password: ${{ inputs.DOCKERHUB_PASSWORD }}
+
+#     - name: 'Build Docker Image'
+#       uses: docker/build-push-action@v6
+#       with: 
+#         context: .
+#         file: ./Dockerfile
+#         push: true
+#         tags: ${{inputs.DOCKERHUB_USERNAME}}/${{inputs.DOCKERHUB_REPO_NAME}}:latest
+
+name: 'Docker Build'
+description: 'Build Docker Image'
+runs:
+  using: 'composite'
+  steps:
+    - name: 'Build Docker Image'
+      run: echo "Starting build docker image"
+      shell: bash
+
+    - name: 'Docker Image is built successfully'
+      run: echo "Docker Image is built successfully"
+      shell: bash

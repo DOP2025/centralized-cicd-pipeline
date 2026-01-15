@@ -1,0 +1,12 @@
+name: 'Analyze Code with SonarQube'
+description: 'Build Docker Image'
+runs:
+  using: 'composite'
+  steps:
+    - name: 'Analyze Code'
+      run: echo "Starting analyze source code with SonarQube"
+      shell: bash
+
+    - name: 'Analyzing Code success'
+      run: echo "Analyzing Code success"
+      shell: bash
