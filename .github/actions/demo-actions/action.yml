@@ -1,0 +1,8 @@
+name: 'demo composite action'
+description: 'A simple demo composite action to show how to create composite actions in GitHub Actions'
+runs:
+  using: 'composite'
+  steps:
+    - name: 'Demo Composite Action Step'
+      run: echo "This is a demo composite action!"
+      shell: bash

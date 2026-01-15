@@ -9,3 +9,5 @@ jobs:
     steps:
       - name: Demo Workflow Executed Successfully!
         run: echo "Demo Workflow Executed Successfully!"
+      - name: Call composite action
+        uses: ./.github/actions/demo-actions@main
