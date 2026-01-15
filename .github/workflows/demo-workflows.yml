@@ -8,4 +8,4 @@ jobs:
     runs-on: dop10_self_hosted_runner_01
     steps:
       - name: Demo Workflow Executed Successfully!
-        run: echo "Demo Workflow Executed Successfully!
+        run: echo "Demo Workflow Executed Successfully!"
