@@ -23,7 +23,11 @@ jobs:
       # - name: Checkout Repo
       #   uses: actions/checkout@v4
       
-      # - name: Analyze Code
-      #   uses: DOP2025/centralized-cicd-pipeline/.github/actions/analyze-code@main
+      - name: Analyze Code
+        uses: DOP2025/centralized-cicd-pipeline/.github/actions/analyze-code@main
 
-      # - name: 
+      - name: Docker Build 
+        uses: DOP2025/centralized-cicd-pipeline/.github/actions/docker-build@main
+
+      - name: Docker Push
+        uses: DOP2025/centralized-cicd-pipeline/.github/actions/docker-push@main
