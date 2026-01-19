@@ -17,7 +17,7 @@ runs:
         top_extension=$(git ls-files |
           sed -n 's/.*\.\([a-zA-Z0-9]*\)$/\1/p' |
           tr '[:upper:]' '[:lower:]' |
-          grep -v -E '^(md|yml|yaml|json|gitignore|dockerfile|sh|txt|png|jpg|jpeg|gif|svg|xml|html|css|conf|log|ico|map)$' |
+          grep -v -E '^(md|yml|yaml|json|gitignore|dockerfile|sh|txt|png|jpg|jpeg|gif|svg|xml|html|css|conf|log|ico|map|tf)$' |
           sort | uniq -c | sort -nr |
           head -n 1 |
           awk '{print $2}')
@@ -45,9 +45,9 @@ runs:
           cs)
             language="dotnet"
             ;;
-          tf)
-            language="terraform"
-            ;;
+          # tf)
+          #   language="terraform"
+          #   ;;
           *)
             language="unknown"
             ;;
