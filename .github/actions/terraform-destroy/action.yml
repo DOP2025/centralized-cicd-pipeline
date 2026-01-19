@@ -1,5 +1,5 @@
-name: 'Terraform Plan'
-description: 'A composite action that configures AWS credentials and runs terraform plan.'
+name: 'Terraform Destroy'
+description: 'A composite action that configures AWS credentials and runs terraform destroy.'
 
 inputs:
   TERRAFORM_WORKING_DIR:
@@ -29,7 +29,7 @@ runs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v3
 
-    - name: Terraform Plan
+    - name: Terraform Destroy
       shell: bash
       working-directory: ${{ inputs.TERRAFORM_WORKING_DIR }}
-      run: terraform plan -no-color
+      run: terraform destroy -auto-approve -no-color

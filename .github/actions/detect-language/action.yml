@@ -1,0 +1,54 @@
+name: 'Detect Repository Language'
+description: 'Detects the dominant programming language of a repository based on file extensions.'
+outputs:
+  language:
+    description: "The detected language (e.g., 'javascript', 'python', 'java', 'dotnet', 'go', 'unknown')."
+    value: ${{ steps.detect.outputs.language }}
+
+runs:
+  using: "composite"
+  steps:
+    - id: detect
+      shell: bash
+      run: |
+        set -e
+        # Find the most common file extension, ignoring common non-code/markup files.
+        # This gives a good indication of the primary programming language.
+        top_extension=$(git ls-files |
+          sed -n 's/.*\.\([a-zA-Z0-9]*\)$/\1/p' |
+          tr '[:upper:]' '[:lower:]' |
+          grep -v -E '^(md|yml|yaml|json|gitignore|dockerfile|sh|txt|png|jpg|jpeg|gif|svg|xml|html|css|conf|log|ico|map)$' |
+          sort | uniq -c | sort -nr |
+          head -n 1 |
+          awk '{print $2}')
+
+        if [ -z "$top_extension" ]; then
+          echo "language=unknown" >> $GITHUB_OUTPUT
+          exit 0
+        fi
+
+        # Map the most common extension to a language identifier.
+        # This can be expanded with more languages as needed.
+        case "$top_extension" in
+          js|jsx|ts|tsx)
+            language="javascript"
+            ;;
+          py)
+            language="python"
+            ;;
+          java)
+            language="java"
+            ;;
+          go)
+            language="go"
+            ;;
+          cs)
+            language="dotnet"
+            ;;
+          *)
+            language="unknown"
+            ;;
+        esac
+
+        echo "Detected top extension: '$top_extension', mapping to language: '$language'"
+        echo "language=$language" >> $GITHUB_OUTPUT

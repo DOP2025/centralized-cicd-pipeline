@@ -1,0 +1,35 @@
+name: 'Terraform Apply'
+description: 'A composite action that configures AWS credentials and runs terraform apply.'
+
+inputs:
+  TERRAFORM_WORKING_DIR:
+    description: 'The working directory for Terraform commands.'
+    required: false
+    default: '.'
+  AWS_ACCESS_KEY_ID:
+    description: 'AWS access key ID.'
+    required: true
+  AWS_SECRET_ACCESS_KEY:
+    description: 'AWS secret access key.'
+    required: true
+  AWS_REGION:
+    description: 'AWS region.'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ inputs.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ inputs.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ inputs.AWS_REGION }}
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+
+    - name: Terraform Apply
+      shell: bash
+      working-directory: ${{ inputs.TERRAFORM_WORKING_DIR }}
+      run: terraform apply -auto-approve -no-color
