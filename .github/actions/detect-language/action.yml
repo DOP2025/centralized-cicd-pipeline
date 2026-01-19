@@ -45,6 +45,8 @@ runs:
           cs)
             language="dotnet"
             ;;
+          tf)
+            language="terraform"
           *)
             language="unknown"
             ;;
