@@ -25,8 +25,7 @@ jobs:
         uses: ./centralized-cicd-pipeline/.github/actions/detect-language
       
       - name: Display Programing Language of Project
-        run: |
-          echo {{steps.detect_lang.outputs.language}}
+        run: 'echo "Detected language: ${{ steps.detect_lang.outputs.language }}"'
 
       # - name: Call composite action
       #   uses: DOP2025/centralized-cicd-pipeline/.github/actions/demo-actions@main
