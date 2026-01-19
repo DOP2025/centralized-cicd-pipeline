@@ -47,6 +47,7 @@ runs:
             ;;
           tf)
             language="terraform"
+            ;;
           *)
             language="unknown"
             ;;
