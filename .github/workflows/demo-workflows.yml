@@ -10,16 +10,19 @@ jobs:
       - name: Demo Workflow Executed Successfully!
         run: echo "Demo Workflow Executed Successfully!"
 
+      - name: Checkout Caller Repository Code
+        uses: actions/checkout@v4
+
       - name: Checkout Centralized Actions
         uses: actions/checkout@v6
         with:
           repository: DOP2025/centralized-cicd-pipeline
-          path: centralized-cicd-pipeline-tools
+          path: centralized-cicd-pipeline
           # token: ${{secrets.GITHUB_PAT}} # Required if repo is private
       
       - name: Detect Programing Language of Project
         id: detect_lang
-        uses: ./.github/actions/detect-language
+        uses: ./centralized-cicd-pipeline/.github/actions/detect-language
       
       - name: Display Programing Language of Project
         run: |
