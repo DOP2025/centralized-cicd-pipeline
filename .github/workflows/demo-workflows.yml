@@ -2,7 +2,51 @@ name: DEMO WORKFLOWS
 
 on: 
   workflow_call:
-
+    inputs: 
+      REGISTRY_TYPE:
+        description: 'The type of container registry: (dockerhub or ecr)'
+        required: false
+        type: string
+        default: 'dockerhub'
+      IMAGE_NAME:
+        description: 'The name of the Docker image.'
+        required: true
+        type: string
+      IMAGE_TAG:
+        description: 'The tag for the Docker image.'
+        required: false
+        type: string
+        default: 'latest'
+      DOCKERFILE_PATH:
+        description: 'The path to the Dockerfile.'
+        required: false
+        type: string
+        default: 'Dockerfile'
+      BUILD_CONTEXT:
+        description: 'The build context for the Docker build.'
+        required: false
+        type: string
+        default: '.'
+      # Docker Hub specific
+      DOCKER_USERNAME:
+        description: 'Docker Hub username.'
+        required: false
+        type: string
+      # ECR specific
+      AWS_REGION:
+        description: 'AWS region for ECR.'
+        required: false
+        type: string
+    secrets:
+      # Docker Hub specific
+      DOCKER_PASSWORD:
+        required: false
+      # ECR specific
+      AWS_ACCESS_KEY_ID:
+        required: false
+      AWS_SECRET_ACCESS_KEY:
+        required: false
+        
 jobs:
   demo:
     runs-on: dop10_self_hosted_runner_01
@@ -27,6 +71,22 @@ jobs:
       - name: Display Programing Language of Project
         run: 'echo "Detected language: ${{ steps.detect_lang.outputs.language }}"'
 
+      - name: Build and Push Docker Image to DockerHub
+        uses: ./centralized-cicd-pipeline/.github/actions/docker-build-and-push
+        with:
+          REGISTRY_TYPE: ${{ inputs.REGISTRY_TYPE }}
+          IMAGE_NAME: ${{ inputs.IMAGE_NAME }}
+          IMAGE_TAG: ${{ inputs.IMAGE_TAG }}
+          DOCKERFILE_PATH: ${{ inputs.DOCKERFILE_PATH }}
+          BUILD_CONTEXT: ${{ inputs.BUILD_CONTEXT }}
+          # Docker Hub
+          DOCKER_USERNAME: ${{ inputs.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          # ECR
+          AWS_REGION: ${{ inputs.AWS_REGION }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          
       # - name: Call composite action
       #   uses: DOP2025/centralized-cicd-pipeline/.github/actions/demo-actions@main
 
