@@ -63,6 +63,9 @@ jobs:
           repository: DOP2025/centralized-cicd-pipeline
           path: centralized-cicd-pipeline
           # token: ${{secrets.GITHUB_PAT}} # Required if repo is private
+
+      - name: Set up Docker
+        uses: docker/setup-docker-action@v4
       
       - name: Detect Programing Language of Project
         id: detect_lang

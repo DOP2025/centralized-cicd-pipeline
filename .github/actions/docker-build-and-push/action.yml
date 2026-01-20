@@ -72,10 +72,10 @@ runs:
         tags: |
           type=raw,value=${{ inputs.IMAGE_TAG }}
 
-    - name: Set up QEMU (disabled)
-      # uses: docker/setup-qemu-action@v3
-      run: echo "Set up QEMU is disabled as it can cause issues on self-hosted runners."
-      shell: bash
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v3
+      # run: echo "Set up QEMU is disabled as it can cause issues on self-hosted runners."
+      # shell: bash
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
