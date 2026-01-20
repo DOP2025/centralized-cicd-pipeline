@@ -92,6 +92,13 @@ jobs:
       - name: Display Programing Language of Project
         run: 'echo "Detected language: ${{ steps.detect_lang.outputs.language }}"'
 
+      - name: Analyze Source Code with SonarQube
+        uses: ./centralized-cicd-pipeline/.github/actions/analyze-code
+        with:
+          SONAR_HOST_URL: ${{secrets.SONAR_HOST_URL}}
+          SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
+          SONAR_PROJECT_KEY: ${{secrets.SONAR_PROJECT_KEY}}
+
       - name: Build and Push Docker Image to DockerHub
         uses: ./centralized-cicd-pipeline/.github/actions/docker-build-and-push
         with:
