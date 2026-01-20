@@ -54,9 +54,6 @@ jobs:
       - name: Demo Workflow Executed Successfully!
         run: echo "Demo Workflow Executed Successfully!"
 
-      - name: Free Disk Space
-        uses: ./centralized-cicd-pipeline/.github/actions/free-disk-space
-
       - name: Checkout Caller Repository Code
         uses: actions/checkout@v4
 
@@ -67,6 +64,15 @@ jobs:
           path: centralized-cicd-pipeline
           # token: ${{secrets.GITHUB_PAT}} # Required if repo is private
 
+      - name: Debug file structure
+        run: |
+          pwd
+          ls -laR
+        shell: bash
+
+      # - name: Free Disk Space
+      #   uses: ./centralized-cicd-pipeline/.github/actions/free-disk-space
+      
       - name: Set up Docker
         uses: docker/setup-docker-action@v4
       
