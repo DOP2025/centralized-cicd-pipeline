@@ -73,8 +73,8 @@ jobs:
       # - name: Free Disk Space
       #   uses: ./centralized-cicd-pipeline/.github/actions/free-disk-space
       
-      - name: Set up Docker
-        uses: docker/setup-docker-action@v4
+      # - name: Set up Docker
+      #   uses: docker/setup-docker-action@v4
       
       - name: Detect Programing Language of Project
         id: detect_lang
