@@ -58,7 +58,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Checkout Centralized Actions
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
         with:
           repository: DOP2025/centralized-cicd-pipeline
           path: centralized-cicd-pipeline
