@@ -64,6 +64,9 @@ jobs:
           path: centralized-cicd-pipeline
           # token: ${{secrets.GITHUB_PAT}} # Required if repo is private
 
+      - name: Free Disk Space
+        uses: ./centralized-cicd-pipeline/.github/actions/free-disk-space
+
       - name: Set up Docker
         uses: docker/setup-docker-action@v4
       
